@@ -14,8 +14,8 @@ var FxEventLogger = func(log *Logger) fxevent.Logger {
 }
 
 func (l *Logger) LogEvent(event fxevent.Event) {
-	fmt.Println("Event received...",event)
-	l.ToZerolog().Debug().Interface("event", event).Msg("event received")
+	//fmt.Println("Event received...",event)
+	//l.ToZerolog().Debug().Interface("event", event).Msg("event received")
 	switch e := event.(type) {
 	case *fxevent.OnStartExecuting:
 		l.ToZerolog().Info().Str("callee", e.FunctionName).
