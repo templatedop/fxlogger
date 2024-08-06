@@ -4,6 +4,7 @@ import (
 	//"context"
 	"context"
 	"fmt"
+
 	//"gotemplate/logger"
 	"os"
 
@@ -12,11 +13,11 @@ import (
 
 const (
 	Service = "service"
-	Frame =3
+	Frame   = 3
 )
 
 type Logger struct {
-	logger *zerolog.Logger
+	logger       *zerolog.Logger
 	hasRequestID bool
 	//ctx   context.Context
 }
@@ -26,10 +27,16 @@ func (l *Logger) ToZerolog() *zerolog.Logger {
 }
 
 func (l *Logger) ContextLogger(ctx context.Context) *Logger {
-	requestid:=ctx.Value("request_id")
-	ls:= l.logger.With().Str("request_id", requestid.(string)).Logger()
-	l.logger = &ls
-	
+	if !l.hasRequestID {
+		requestid := ctx.Value("request_id")
+		ls := l.logger.With().Str("request_id", requestid.(string)).Logger()
+		l.logger = &ls
+		l.hasRequestID = true
+	}
+	// requestid:=ctx.Value("request_id")
+	// ls:= l.logger.With().Str("request_id", requestid.(string)).Logger()
+	// l.logger = &ls
+
 	//l.logger = zerolog.Ctx(ctx)
 	return l
 	//return &Logger{logger:zerolog.Ctx(ctx)}
@@ -109,7 +116,6 @@ func (l *Logger) ChainableError() *zerolog.Event {
 	return l.logger.Error()
 }
 
-
 func (l *Logger) FromZerolog(logger *zerolog.Logger) *Logger {
-	return &Logger{logger:logger}
+	return &Logger{logger: logger}
 }
