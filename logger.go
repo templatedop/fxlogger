@@ -25,7 +25,11 @@ func (l *Logger) ToZerolog() *zerolog.Logger {
 }
 
 func (l *Logger) ContextLogger(ctx context.Context) *Logger {
-	l.logger = zerolog.Ctx(ctx)
+	requestid:=ctx.Value("request_id")
+	ls:= l.logger.With().Str("request_id", requestid.(string)).Logger()
+	l.logger = &ls
+	
+	//l.logger = zerolog.Ctx(ctx)
 	return l
 	//return &Logger{logger:zerolog.Ctx(ctx)}
 }
