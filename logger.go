@@ -9,7 +9,7 @@ import (
 	"os"
 
 	"github.com/rs/zerolog"
-
+	"github.com/templatedop/util"
 	//"github.com/templatedop/util"
 )
 
@@ -32,25 +32,27 @@ func (l *Logger) ContextLogger(ctx context.Context) *Logger {
 
 	
 	//if !l.hasRequestID {
-		// requestid := ctx.Value(util.ContextKey(util.RequestIDKey))
+		requestid := ctx.Value(util.ContextKey(util.RequestIDKey))
 		// ls := l.logger.With().Str("request_id", requestid.(string)).Logger()
 		// l.logger = &ls
 
-		ls1:=l.logger
-		l.logger = ls1
+		// ls1:=l.logger
+		// l.logger = ls1
+
+		ls := l.logger.With().Str("request_id", requestid.(string)).Logger()
+		return l.FromZerolog(&ls)
+		//return l{&ls}
 
 
 
-
-
-		l.hasRequestID = true
+		//l.hasRequestID = true
 //	}
 	// requestid:=ctx.Value("request_id")
 	// ls:= l.logger.With().Str("request_id", requestid.(string)).Logger()
 	// l.logger = &ls
 
 	//l.logger = zerolog.Ctx(ctx)
-	return l
+	//return l
 	//return &Logger{logger:zerolog.Ctx(ctx)}
 }
 
