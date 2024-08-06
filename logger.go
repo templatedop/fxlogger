@@ -24,8 +24,11 @@ func (l *Logger) ToZerolog() *zerolog.Logger {
 }
 
 func (l *Logger) ContextLogger(ctx context.Context) *Logger {
+	l.logger = zerolog.Ctx(ctx)
+	return l
 
-	return &Logger{zerolog.Ctx(ctx)}
+
+	//return &Logger{logger:zerolog.Ctx(ctx)}
 }
 
 func (l *Logger) CallerIncluded() *Logger {
@@ -101,6 +104,7 @@ func (l *Logger) ChainableWarn() *zerolog.Event {
 func (l *Logger) ChainableError() *zerolog.Event {
 	return l.logger.Error()
 }
+
 
 func (l *Logger) FromZerolog(logger *zerolog.Logger) *Logger {
 	return &Logger{logger}
