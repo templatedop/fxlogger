@@ -12,6 +12,7 @@ import (
 
 const (
 	Service = "service"
+	Frame =3
 )
 
 type Logger struct {
@@ -26,13 +27,11 @@ func (l *Logger) ToZerolog() *zerolog.Logger {
 func (l *Logger) ContextLogger(ctx context.Context) *Logger {
 	l.logger = zerolog.Ctx(ctx)
 	return l
-
-
 	//return &Logger{logger:zerolog.Ctx(ctx)}
 }
 
 func (l *Logger) CallerIncluded() *Logger {
-	lo := l.logger.With().CallerWithSkipFrameCount(zerolog.CallerSkipFrameCount + 3).Logger()
+	lo := l.logger.With().CallerWithSkipFrameCount(zerolog.CallerSkipFrameCount + Frame).Logger()
 	return &Logger{logger: &lo}
 	//l.logger = l.logger.With().CallerWithSkipFrameCount(zerolog.CallerSkipFrameCount + 3).Logger().Level(level)
 
