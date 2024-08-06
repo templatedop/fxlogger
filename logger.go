@@ -31,12 +31,12 @@ func (l *Logger) ToZerolog() *zerolog.Logger {
 func (l *Logger) ContextLogger(ctx context.Context) *Logger {
 
 	
-	if !l.hasRequestID {
+	//if !l.hasRequestID {
 		requestid := ctx.Value(util.ContextKey(util.RequestIDKey))
 		ls := l.logger.With().Str("request_id", requestid.(string)).Logger()
 		l.logger = &ls
 		l.hasRequestID = true
-	}
+//	}
 	// requestid:=ctx.Value("request_id")
 	// ls:= l.logger.With().Str("request_id", requestid.(string)).Logger()
 	// l.logger = &ls
