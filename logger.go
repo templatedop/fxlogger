@@ -17,6 +17,7 @@ const (
 
 type Logger struct {
 	logger *zerolog.Logger
+	hasRequestID bool
 	//ctx   context.Context
 }
 
@@ -110,5 +111,5 @@ func (l *Logger) ChainableError() *zerolog.Event {
 
 
 func (l *Logger) FromZerolog(logger *zerolog.Logger) *Logger {
-	return &Logger{logger}
+	return &Logger{logger:logger}
 }

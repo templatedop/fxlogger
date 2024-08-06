@@ -18,14 +18,13 @@ func NewDefaultLoggerFactory() LoggerFactory {
 }
 
 func (f *DefaultLoggerFactory) Create(options ...LoggerOption) (*Logger, error) {
-	
+
 	zerolog.TimeFieldFormat = time.RFC3339
 
 	appliedOpts := defaultLoggerOptions
 	for _, applyOpt := range options {
 		applyOpt(&appliedOpts)
 	}
-
 
 	log.Ctx(appliedOpts.Context)
 	logger := log.
@@ -34,8 +33,8 @@ func (f *DefaultLoggerFactory) Create(options ...LoggerOption) (*Logger, error) 
 		Str(Service, appliedOpts.Name).
 		Logger().
 		Level(appliedOpts.Level)
-		
+
 		//WithContext(appliedOpts.Context)
 
-	return &Logger{&logger}, nil
+	return &Logger{&logger, false}, nil
 }

@@ -1,11 +1,11 @@
 package fxlogger
 
-import (
-	"context"
+// import (
+// 	"context"
 
-	"github.com/rs/zerolog"
-)
+// 	"github.com/rs/zerolog"
+// )
 
-func CtxLogger(ctx context.Context) *Logger {
-	return &Logger{zerolog.Ctx(ctx)}
-}
+// func CtxLogger(ctx context.Context) *Logger {
+// 	return &Logger{zerolog.Ctx(ctx)}
+// }
