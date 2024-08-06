@@ -63,6 +63,8 @@ github.com/subosito/gotenv v1.6.0 h1:9NlTDc1FTs4qu0DDq7AEtTPNw6SVm7uBMsUCUjABIf8
 github.com/subosito/gotenv v1.6.0/go.mod h1:Dk4QP5c2W3ibzajGcXpNraDfq2IrhjMIvMSWPKKo0FU=
 github.com/templatedop/fxconfig v0.0.0-20240804080808-ce3c982bc439 h1:f7yfez5SVV6Mo4N39k/TH7BtBnGMR4OeF2FB5VPN82c=
 github.com/templatedop/fxconfig v0.0.0-20240804080808-ce3c982bc439/go.mod h1:smQjGIR6N+LxAW1NIE0FGX0q770D89T+kKMSh53YWQo=
+github.com/templatedop/util v0.0.1 h1:C3VNL2dJSwZtDA/kyeDmp+7Rr1mfNci4KOqdc4V2XxQ=
+github.com/templatedop/util v0.0.1/go.mod h1:cAwvW2VPIwhx0FkkdmQ9oGHXtrwjgNRxZ65a53YjX8Y=
 go.uber.org/dig v1.17.1 h1:Tga8Lz8PcYNsWsyHMZ1Vm0OQOUaJNDyvPImgbAu9YSc=
 go.uber.org/dig v1.17.1/go.mod h1:Us0rSJiThwCv2GteUN0Q7OKvU7n5J4dxZ9JKUXozFdE=
 go.uber.org/fx v1.22.1 h1:nvvln7mwyT5s1q201YE29V/BFrGor6vMiDNpU/78Mys=

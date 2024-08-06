@@ -18,7 +18,7 @@ func (l *Logger) LogEvent(event fxevent.Event) {
 	//l.ToZerolog().Debug().Interface("event", event).Msg("event received")
 	switch e := event.(type) {
 	case *fxevent.OnStartExecuting:
-		l.ToZerolog().Info().Str("callee", e.FunctionName).
+		l.ToZerolog().Debug().Str("callee", e.FunctionName).
 			Str("caller", e.CallerName).
 			Msg("OnStart hook executing")
 	case *fxevent.OnStartExecuted:
@@ -30,13 +30,13 @@ func (l *Logger) LogEvent(event fxevent.Event) {
 				//Str("",e.Runtime.).
 				Msg("OnStart hook failed")
 		} else {
-			l.ToZerolog().Info().Str("callee", e.FunctionName).
+			l.ToZerolog().Debug().Str("callee", e.FunctionName).
 				Str("caller", e.CallerName).
 				Str("runtime", e.Runtime.String()).
 				Msg("OnStart hook executed")
 		}
 	case *fxevent.OnStopExecuting:
-		l.ToZerolog().Info().Str("callee", e.FunctionName).
+		l.ToZerolog().Debug().Str("callee", e.FunctionName).
 			Str("caller", e.CallerName).
 			Msg("OnStop hook executing")
 	case *fxevent.OnStopExecuted:
@@ -46,7 +46,7 @@ func (l *Logger) LogEvent(event fxevent.Event) {
 				Str("callee", e.CallerName).
 				Msg("OnStop hook failed")
 		} else {
-			l.ToZerolog().Info().Str("callee", e.FunctionName).
+			l.ToZerolog().Debug().Str("callee", e.FunctionName).
 				Str("caller", e.CallerName).
 				Str("runtime", e.Runtime.String()).
 				Msg("OnStop hook executed")
@@ -56,11 +56,11 @@ func (l *Logger) LogEvent(event fxevent.Event) {
 			l.ToZerolog().Warn().Err(e.Err).Str("type", e.TypeName).Msg("supplied")
 		} else {
 
-			l.ToZerolog().Info().Str("type", e.TypeName).Msg("supplied")
+			l.ToZerolog().Debug().Str("type", e.TypeName).Msg("supplied")
 		}
 	case *fxevent.Provided:
 		for _, rtype := range e.OutputTypeNames {
-			l.ToZerolog().Info().Str("type", rtype).
+			l.ToZerolog().Debug().Str("type", rtype).
 				//Caller().
 				Str("constructor", e.ConstructorName).
 				Str("module", e.ModuleName).
@@ -77,10 +77,10 @@ fmt.Println("Error in invoked...",e.Err)
 				Err(e.Err).Str("stack", e.Trace).
 				Str("function", e.FunctionName).Msg("invoke failed")
 		} else {
-			l.ToZerolog().Info().Str("function", e.FunctionName).Msg("invoked")
+			l.ToZerolog().Debug().Str("function", e.FunctionName).Msg("invoked")
 		}
 	case *fxevent.Stopping:
-		l.ToZerolog().Info().Str("signal", strings.ToUpper(e.Signal.String())).Msg("received signal")
+		l.ToZerolog().Debug().Str("signal", strings.ToUpper(e.Signal.String())).Msg("received signal")
 	case *fxevent.Stopped:
 		if e.Err != nil {
 			l.ToZerolog().Error().Err(e.Err).Msg("stop failed")
@@ -95,13 +95,13 @@ fmt.Println("Error in invoked...",e.Err)
 		if e.Err != nil {
 			l.ToZerolog().Error().Err(e.Err).Msg("start failed")
 		} else {
-			l.ToZerolog().Info().Msg("started")
+			l.ToZerolog().Debug().Msg("started")
 		}
 	case *fxevent.LoggerInitialized:
 		if e.Err != nil {
-			l.ToZerolog().Info().Err(e.Err).Msg("custom logger initialization failed")
+			l.ToZerolog().Debug().Err(e.Err).Msg("custom logger initialization failed")
 		} else {
-			l.ToZerolog().Info().Str("function", e.ConstructorName).Msg("initialized custom fxevent.Logger")
+			l.ToZerolog().Debug().Str("function", e.ConstructorName).Msg("initialized custom fxevent.Logger")
 		}
 	}
 }

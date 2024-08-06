@@ -9,6 +9,8 @@ import (
 	"os"
 
 	"github.com/rs/zerolog"
+
+	"github.com/templatedop/util"
 )
 
 const (
@@ -27,8 +29,10 @@ func (l *Logger) ToZerolog() *zerolog.Logger {
 }
 
 func (l *Logger) ContextLogger(ctx context.Context) *Logger {
+
+	
 	if !l.hasRequestID {
-		requestid := ctx.Value("request_id")
+		requestid := ctx.Value(util.ContextKey(util.RequestIDKey))
 		ls := l.logger.With().Str("request_id", requestid.(string)).Logger()
 		l.logger = &ls
 		l.hasRequestID = true
